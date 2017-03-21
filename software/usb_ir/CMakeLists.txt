@@ -19,7 +19,7 @@ EndIf()
 
 # default the LIBDIR if it was not set
 If("${LIBDIR}" STREQUAL "")
-  Set(LIBDIR "/usr/lib")
+  Set(LIBDIR "/usr/local/lib")
 EndIf()
 # TODO: installation should go to lib64 on some platforms, but not sure this handles it now
 
@@ -168,7 +168,7 @@ set_property(TARGET igdaemon
              APPEND PROPERTY COMPILE_DEFINITIONS SUPPORT_EXPORTS)
 target_link_libraries(igdaemon iguanaIR
                       ${DAEMONLIBS} ${BASELIBS} ${ARGPLIB})
-install(TARGETS igdaemon DESTINATION /usr/bin)
+install(TARGETS igdaemon DESTINATION /usr/local/bin)
 
 
 # build all the drivers
@@ -179,7 +179,7 @@ add_executable(igclient client.c list.c ${BASESRC})
 set_property(TARGET igclient
              APPEND PROPERTY COMPILE_DEFINITIONS SUPPORT_EXPORTS)
 target_link_libraries(igclient iguanaIR ${BASELIBS} ${ARGPLIB})
-install(TARGETS igclient DESTINATION /usr/bin)
+install(TARGETS igclient DESTINATION /usr/local/bin)
 
 
 # see if we have python and swig
@@ -234,7 +234,7 @@ Else()
     install(CODE "
       execute_process(COMMAND ln -sf
                               ../share/iguanaIR-reflasher/iguanaIR-reflasher
-                              \$ENV{DESTDIR}/usr/bin/iguanaIR-reflasher)
+                              \$ENV{DESTDIR}/usr/local/bin/iguanaIR-reflasher)
     ")
   Else()
     Message("    Skipping python build")
